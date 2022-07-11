@@ -1,6 +1,7 @@
 import { React, useContext, useEffect, useState } from 'react';
 import api from '../api';
 import { Link } from 'react-router-dom';
+import UserContext from '../contexts/UserContext';
 
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -14,7 +15,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { Box } from '@mui/system';
 import TextField from '@mui/material/TextField';
-import UserContext from '../contexts/UserContext';
 
 const Statement = () => {
     const [ user ] = useContext(UserContext);

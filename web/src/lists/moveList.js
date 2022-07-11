@@ -32,17 +32,6 @@ const Movelist = () => {
     const [ month, setMonth ] = useState(new Date().getMonth());
     const [ year, setYear ] = useState(new Date().getFullYear());
 
-    const getData = async () => {
-        setLoading(true);
-
-        await api.get('move')
-          .then(({ data }) => {
-            setData(data);
-            setLoading(false);
-          })
-          .catch(e => console.log(e));
-      }
-
       const handleFilter = async () => {
         await api.post('statement', { user: user._id, year: year, month: month })
           .then(({ data }) => {
@@ -59,7 +48,7 @@ const Movelist = () => {
       const deleteMove = async (id, name) => {
         if (window.confirm(`Excluir ${name}?`)) {
           await api.delete(`move/${id}`)
-            .then(getData())
+            .then(handleFilter())
             .catch(e => console.log(e));
         }
       };

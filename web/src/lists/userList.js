@@ -1,6 +1,7 @@
-import { React, useEffect, useState } from 'react';
+import { React, useContext, useEffect, useState } from 'react';
 import api from '../api';
 import { Link, useNavigate } from 'react-router-dom';
+import UserContext from '../contexts/UserContext';
 
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -17,6 +18,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const Userlist = () => {
     const navigate = useNavigate();
+    const [ user ] = useContext(UserContext);
+
     const [ data, setData ] = useState([]);
     const [ loading, setLoading ] = useState(false);
 
@@ -37,10 +40,14 @@ const Userlist = () => {
       }, []);
 
       const deleteProduct = async (id, name) => {
-        if (window.confirm(`Excluir ${name}?`)) {
-          await api.delete(`user/${id}`)
-            .then(getData())
-            .catch(e => console.log(e));
+        if (name === 'admin') {
+          alert('Atenção! Usuário Administrador não pode ser excluído.');
+        } else {
+          if (window.confirm(`Excluir ${name}?`)) {
+            await api.delete(`user/${id}`)
+              .then(getData())
+              .catch(e => console.log(e));
+          };
         }
       }
 
