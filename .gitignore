@@ -2,6 +2,7 @@
 /api/dist
 
 /web/node_modules
+/web/build
 
 /backup
 /files
